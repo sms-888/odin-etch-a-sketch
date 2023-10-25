@@ -14,6 +14,7 @@ function drawGrid(sideLength) {
     }
 }
 
+// remove old grid boxes
 function removeGrid() {
     const containerDiv = document.querySelector(".container");
     const gridDivs = containerDiv.querySelectorAll("div");
@@ -40,6 +41,7 @@ function highlightGridBox(e) {
     e.target.style.background = 'blue';
 }
 
+// initialise web pages
 function initialise() {
     const btn = document.querySelector('button');
     btn.addEventListener('click', resetGrid);
