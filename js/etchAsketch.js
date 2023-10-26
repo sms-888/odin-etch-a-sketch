@@ -9,7 +9,7 @@ function drawGrid(sideLength) {
         gridDiv.setAttribute("class", "box")
         gridDiv.style.cssText = styleText;
         // add event listener for mouse enter events
-        gridDiv.addEventListener('mouseenter', highlightGridBoxRandom);
+        gridDiv.addEventListener('mouseenter', highlightGridBoxGradient);
         containerDiv.appendChild(gridDiv);
     }
 }
@@ -46,12 +46,29 @@ function random(num) {
     return Math.round(Math.random() * num);
 }
 
+// return array of r, g, b color decreased by 10 percent
+function decColorTenPerc(rLocal, gLocal, bLocal) {
+    // const MINCOLOR = 0;
+    let tenPercDec = .9;
+    return [rLocal, gLocal, bLocal].map(
+        (x) => Math.round(x * tenPercDec));
+}
+
 // hightlist grid box with random color
 function highlightGridBoxRandom(e) {
     const MAXCOLOR = 255;
     boxColor = [random(MAXCOLOR), random(MAXCOLOR), random(MAXCOLOR)];
     rgb = `rgb(${boxColor.toString()})`;
     e.target.style.background = rgb;
+}
+
+// hightlist grid box with gradient of color from 0,0,0 to 255, 255, 255
+function highlightGridBoxGradient(e) {
+    //const MAXCOLOR = 255;
+    boxColor = [r, g, b]; // using global variables ???? not good!
+    rgb = `rgb(${boxColor.toString()})`;
+    e.target.style.background = rgb;
+    [r, g, b] = decColorTenPerc(r, g, b); // update global variables ??? not good
 }
 
 // initialise web pages
@@ -61,5 +78,6 @@ function initialise() {
     drawGrid(16);
 }
 
+let [r, g, b] = [255, 255, 255]; // initial r, g, b coloring
 initialise();
 
