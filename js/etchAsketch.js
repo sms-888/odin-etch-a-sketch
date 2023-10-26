@@ -9,7 +9,7 @@ function drawGrid(sideLength) {
         gridDiv.setAttribute("class", "box")
         gridDiv.style.cssText = styleText;
         // add event listener for mouse enter events
-        gridDiv.addEventListener('mouseenter', highlightGridBox);
+        gridDiv.addEventListener('mouseenter', highlightGridBoxRandom);
         containerDiv.appendChild(gridDiv);
     }
 }
@@ -39,6 +39,19 @@ function resetGrid() {
 // highlight grid box in blue
 function highlightGridBox(e) {
     e.target.style.background = 'blue';
+}
+
+// return an random integer between 0 and num
+function random(num) {
+    return Math.round(Math.random() * num);
+}
+
+// hightlist grid box with random color
+function highlightGridBoxRandom(e) {
+    const MAXCOLOR = 255;
+    boxColor = [random(MAXCOLOR), random(MAXCOLOR), random(MAXCOLOR)];
+    rgb = `rgb(${boxColor.toString()})`;
+    e.target.style.background = rgb;
 }
 
 // initialise web pages
